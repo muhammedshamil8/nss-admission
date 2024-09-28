@@ -152,6 +152,11 @@ function index() {
                   <h1 className='col-span-2 text-center text-sm sm:text-md'>{studentData.GROUP_OPINION ? studentData.GROUP_OPINION : 'None'}</h1>
                 </div>
                 <div className='bg-white text-black font-semibold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4 border border-gray-400'>
+                  <h1 className='col-span-2 text-left text-sm sm:text-md' >Stage Group Activity</h1>
+                  <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.STAGE_GROUP_GRADE ? studentData.STAGE_GROUP_GRADE : 'Nill'}</h1>
+                  <h1 className='col-span-2 text-center text-sm sm:text-md'>{studentData.STAGE_GROUP_OPINION ? studentData.STAGE_GROUP_OPINION : 'None'}</h1>
+                </div>
+                <div className='bg-white text-black font-semibold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4 border border-gray-400'>
                   <h1 className='col-span-2 text-left text-sm sm:text-md' >Stage Performance</h1>
                   <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.STAGE_GRADE ? studentData.STAGE_GRADE : 'Nill'}</h1>
                   <h1 className='col-span-2 text-center text-sm sm:text-md'>{studentData.DEBATE_OPINION ? studentData.DEBATE_OPINION : 'None'}</h1>
@@ -169,7 +174,7 @@ function index() {
       )}
 
       {!loading && initial && (
-        <div className="flex items-center justify-center w-full mt-8">
+        <div className="flex items-center justify-center w-full mt-14">
           <div className="text-center">
             <h1 className="text-2xl font-semibold primary-text mb-2 mx-auto flex items-center justify-center"><LeafyGreen size={36} /></h1>
             <p className="text-lg text-gray-600">Everything is set! You can start your search.</p>

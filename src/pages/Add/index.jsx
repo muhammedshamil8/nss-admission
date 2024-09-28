@@ -56,6 +56,8 @@ function App() {
     DEBATE_OPINION: '',
     GROUP_SCORE: 'N/A',
     GROUP_OPINION: '',
+    STAGE_GROUP_GRADE: 'N/A',
+    STAGE_GROUP_OPINION: '',
     STAGE_SCORE: 'N/A',
     STAGE_OPINION: '',
     OVERALL_OPINION: '',
@@ -93,6 +95,8 @@ function App() {
             DEBATE_OPINION: record[0].fields.DEBATE_OPINION || '',
             GROUP_SCORE: record[0].fields.GROUP_GRADE || 'N/A',
             GROUP_OPINION: record[0].fields.GROUP_OPINION || '',
+            STAGE_GROUP_GRADE: record[0].fields.STAGE_GROUP_GRADE || 'N/A',
+            STAGE_GROUP_OPINION: record[0].fields.STAGE_GROUP_OPINION || '',
             STAGE_SCORE: record[0].fields.STAGE_GRADE || 'N/A',
             STAGE_OPINION: record[0].fields.STAGE_OPINION || '',
             OVERALL_GRADE: record[0].fields.OVERALL_GRADE || '',
@@ -126,6 +130,8 @@ function App() {
       DEBATE_OPINION: '',
       GROUP_SCORE: 'N/A',
       GROUP_OPINION: '',
+      STAGE_GROUP_GRADE: 'N/A',
+      STAGE_GROUP_OPINION: '',
       STAGE_SCORE: 'N/A',
       STAGE_OPINION: '',
       OVERALL_GRADE: ''
@@ -147,6 +153,8 @@ function App() {
         DEBATE_OPINION: grades.DEBATE_OPINION,
         GROUP_GRADE: grades.GROUP_SCORE,
         GROUP_OPINION: grades.GROUP_OPINION,
+        STAGE_GROUP_GRADE: grades.STAGE_GROUP_GRADE,
+        STAGE_GROUP_OPINION: grades.STAGE_GROUP_OPINION,
         STAGE_GRADE: grades.STAGE_SCORE,
         STAGE_OPINION: grades.STAGE_OPINION,
         OVERALL_OPINION: grades.OVERALL_OPINION,
@@ -182,10 +190,11 @@ function App() {
     // Calculate OVERALL_GRADE
     const debateScore = gradePoints[updatedGrades.DEBATE_SCORE] || 0;
     const groupScore = gradePoints[updatedGrades.GROUP_SCORE] || 0;
+    const groupStageScore = gradePoints[updatedGrades.STAGE_GROUP_GRADE] || 0;
     const stageScore = gradePoints[updatedGrades.STAGE_SCORE] || 0;
 
 
-    const overallGrade = (debateScore + groupScore + stageScore) / 3;
+    const overallGrade = (debateScore + groupScore + stageScore + groupStageScore) / 4;
     updatedGrades.OVERALL_GRADE = pointToGrade[Math.round(overallGrade)] || '';
 
     setGrades(updatedGrades);
@@ -307,6 +316,20 @@ function App() {
                 onChange={(e) => setGrades({ ...grades, GROUP_OPINION: e.target.value })}
               />
               <Select
+                label="Stage Group Activity Score"
+                value={grades.STAGE_GROUP_GRADE}
+                onChange={(value) => handleGradeChange("STAGE_GROUP_GRADE", value)}
+              >
+                {Object.keys(gradePoints).map((grade) => (
+                  <Option key={grade} value={grade}>{grade}</Option>
+                ))}
+              </Select>
+              <Textarea
+                label="Stage Group Opinion"
+                value={grades.STAGE_GROUP_OPINION}
+                onChange={(e) => setGrades({ ...grades, STAGE_GROUP_OPINION: e.target.value })}
+              />
+              <Select
                 label="Stage Performance Score"
                 value={grades.STAGE_SCORE}
                 onChange={(value) => handleGradeChange("STAGE_SCORE", value)}
@@ -353,7 +376,7 @@ function App() {
       )}
 
       {!loading && initial && (
-        <div className="flex items-center justify-center w-full mt-8">
+        <div className="flex items-center justify-center w-full mt-14">
           <div className="text-center">
             <h1 className="text-2xl font-semibold primary-text mb-2 mx-auto flex items-center justify-center"><ChefHat size={40} /></h1>
             <p className="text-lg text-gray-600">Everything is set! You can start your search.</p>

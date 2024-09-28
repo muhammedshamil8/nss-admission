@@ -19,7 +19,7 @@ function AdminLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
- 
+
   const handleOpen = () => setOpen(!open);
   return (
     <AuthRoleRequire role="admin">
@@ -42,9 +42,14 @@ function AdminLayout() {
       </div>
 
       {/* Main Content Area */}
-      <main className="max-w-[1300px] mx-auto w-full mt-20">
-        <Outlet />
-      </main>
+      <div className='flex flex-col min-h-[80vh]'>
+        <main className="max-w-[1300px] mx-auto w-full mt-20 flex-grow">
+          <Outlet />
+        </main>
+        <div className='flex justify-end'>
+          <Footer />
+        </div>
+      </div>
 
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>
@@ -67,9 +72,6 @@ function AdminLayout() {
           </Button>
         </DialogFooter>
       </Dialog>
-
-
-      <Footer />
     </AuthRoleRequire>
   );
 }
