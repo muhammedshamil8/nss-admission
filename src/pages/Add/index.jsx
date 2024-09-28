@@ -46,19 +46,19 @@ function App() {
 
   // Score states
   const [grades, setGrades] = useState({
-    COMMUNICATION: 'N/A',
-    DEDICATION: 'N/A',
-    SKILL_ACHIEVEMENT: 'N/A',
+    COMMUNICATION: '',
+    DEDICATION: '',
+    SKILL_ACHIEVEMENT: '',
     SKILL_ACHIEVEMENT_TEXT: '',
     INTERVIEW_OVERALL_OPINION: '',
-    INTERVIEW_OVERALL_GRADE: 'N/A',
-    DEBATE_SCORE: 'N/A',
+    INTERVIEW_OVERALL_GRADE: '',
+    DEBATE_SCORE: '',
     DEBATE_OPINION: '',
-    GROUP_SCORE: 'N/A',
+    GROUP_SCORE: '',
     GROUP_OPINION: '',
-    STAGE_GROUP_GRADE: 'N/A',
+    STAGE_GROUP_GRADE: '',
     STAGE_GROUP_OPINION: '',
-    STAGE_SCORE: 'N/A',
+    STAGE_SCORE: '',
     STAGE_OPINION: '',
     OVERALL_OPINION: '',
     OVERALL_GRADE: ''
@@ -85,19 +85,19 @@ function App() {
           }
           setStudentData(record[0].fields);
           setGrades({
-            COMMUNICATION: record[0].fields.COMMUNICATION_GRADE || 'N/A',
-            DEDICATION: record[0].fields.DEDICATION_GRADE || 'N/A',
-            SKILL_ACHIEVEMENT: record[0].fields.SKILL_ACHIEVEMENT_GRADE || 'N/A',
+            COMMUNICATION: record[0].fields.COMMUNICATION_GRADE || '',
+            DEDICATION: record[0].fields.DEDICATION_GRADE || '',
+            SKILL_ACHIEVEMENT: record[0].fields.SKILL_ACHIEVEMENT_GRADE || '',
             SKILL_ACHIEVEMENT_TEXT: record[0].fields.SKILL_ACHIEVEMENT_TEXT || '',
             INTERVIEW_OVERALL_OPINION: record[0].fields.INTERVIEW_OVERALL_OPINION || '',
-            INTERVIEW_OVERALL_GRADE: record[0].fields.INTERVIEW_OVERALL_GRADE || 'N/A',
-            DEBATE_SCORE: record[0].fields.DEBATE_GRADE || 'N/A',
+            INTERVIEW_OVERALL_GRADE: record[0].fields.INTERVIEW_OVERALL_GRADE || '',
+            DEBATE_SCORE: record[0].fields.DEBATE_GRADE || '',
             DEBATE_OPINION: record[0].fields.DEBATE_OPINION || '',
-            GROUP_SCORE: record[0].fields.GROUP_GRADE || 'N/A',
+            GROUP_SCORE: record[0].fields.GROUP_GRADE || '',
             GROUP_OPINION: record[0].fields.GROUP_OPINION || '',
-            STAGE_GROUP_GRADE: record[0].fields.STAGE_GROUP_GRADE || 'N/A',
+            STAGE_GROUP_GRADE: record[0].fields.STAGE_GROUP_GRADE || '',
             STAGE_GROUP_OPINION: record[0].fields.STAGE_GROUP_OPINION || '',
-            STAGE_SCORE: record[0].fields.STAGE_GRADE || 'N/A',
+            STAGE_SCORE: record[0].fields.STAGE_GRADE || '',
             STAGE_OPINION: record[0].fields.STAGE_OPINION || '',
             OVERALL_GRADE: record[0].fields.OVERALL_GRADE || '',
             OVERALL_OPINION: record[0].fields.OVERALL_OPINION || ''
@@ -120,19 +120,19 @@ function App() {
     setSearchText("");
     setStudentData({});
     setGrades({
-      COMMUNICATION: 'N/A',
-      DEDICATION: 'N/A',
-      SKILL_ACHIEVEMENT: 'N/A',
+      COMMUNICATION: '',
+      DEDICATION: '',
+      SKILL_ACHIEVEMENT: '',
       SKILL_ACHIEVEMENT_TEXT: '',
       INTERVIEW_OVERALL_OPINION: '',
-      INTERVIEW_OVERALL_GRADE: 'N/A',
-      DEBATE_SCORE: 'N/A',
+      INTERVIEW_OVERALL_GRADE: '',
+      DEBATE_SCORE: '',
       DEBATE_OPINION: '',
-      GROUP_SCORE: 'N/A',
+      GROUP_SCORE: '',
       GROUP_OPINION: '',
-      STAGE_GROUP_GRADE: 'N/A',
+      STAGE_GROUP_GRADE: '',
       STAGE_GROUP_OPINION: '',
-      STAGE_SCORE: 'N/A',
+      STAGE_SCORE: '',
       STAGE_OPINION: '',
       OVERALL_GRADE: ''
     });
@@ -185,8 +185,9 @@ function App() {
     const skillAchievementGrade = gradePoints[updatedGrades.SKILL_ACHIEVEMENT] || 0;
 
     const interviewOverallGrade = (communicationGrade + dedicationGrade + skillAchievementGrade) / 3;
-    updatedGrades.INTERVIEW_OVERALL_GRADE = pointToGrade[Math.round(interviewOverallGrade)] || '';
-
+    updatedGrades.INTERVIEW_OVERALL_GRADE = pointToGrade[Math.round(interviewOverallGrade)] || 'D';
+    
+    console.log(updatedGrades);
     // Calculate OVERALL_GRADE
     const debateScore = gradePoints[updatedGrades.DEBATE_SCORE] || 0;
     const groupScore = gradePoints[updatedGrades.GROUP_SCORE] || 0;
@@ -195,12 +196,13 @@ function App() {
 
 
     const overallGrade = (debateScore + groupScore + stageScore + groupStageScore) / 4;
-    updatedGrades.OVERALL_GRADE = pointToGrade[Math.round(overallGrade)] || '';
+    updatedGrades.OVERALL_GRADE = pointToGrade[Math.round(overallGrade)] || 'D';
 
     setGrades(updatedGrades);
   };
 
   const handleOpen = () => setOpen(!open);
+
   return (
     <div className="flex flex-col items-center px-4 p-2">
       <div className='flex items-center justify-center w-full mx-auto'>
