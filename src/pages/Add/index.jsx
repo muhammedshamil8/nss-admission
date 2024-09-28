@@ -217,8 +217,8 @@ function App() {
             <div className='flex w-full items-center justify-center gap-4 secondary-bg p-4 mb-4 rounded-md'>
               <div className='primary-bg  p-3 !text-white text-xl sm:text-3xl font-bold uppercase rounded-2xl'>{studentData.CHEST_NO}</div>
               <div className='flex flex-col items-center justify-center'>
-                <h1 className='text-xl sm:text-3xl font-semibold'>{studentData.NAME}</h1>
-                <p className='-mt-0.5 text-sm sm:text-md'>{studentData.DEPARTMENT}</p>
+                <h1 className='text-xl sm:text-3xl font-semibold text-black'>{studentData.NAME}</h1>
+                <p className='-mt-0.5 text-sm sm:text-md text-black'>{studentData.DEPARTMENT}</p>
               </div>
             </div>
 

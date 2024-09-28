@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, LeafyGreen , Loader } from 'lucide-react'
+import { Search, LeafyGreen, Loader } from 'lucide-react'
 import Airtable from "airtable";
 import backendUrl from "@/const/backendUrl";
 import { useNavigate } from "react-router-dom";
@@ -91,11 +91,13 @@ function index() {
         Object.keys(studentData).length > 0 && (
           <section className='mt-8'>
 
-            <div className='flex w-full items-center justify-center gap-4 secondary-bg p-4'>
-              <div className='primary-bg  p-3 !text-white text-xl sm:text-2xl font-bold uppercase rounded-2xl'>{studentData.CHEST_NO}</div>
-              <div className='flex flex-col items-center justify-center'>
-                <h1 className='text-xl sm:text-3xl font-semibold'>{studentData.NAME}</h1>
-                <p className='-mt-0.5 text-sm sm:text-md'>{studentData.DEPARTMENT}</p>
+            <div className="h-28">
+              <div className='flex w-full items-center justify-center gap-4 secondary-bg p-4 absolute left-0 right-0 '>
+                <div className='primary-bg  p-3 !text-white text-xl sm:text-2xl font-bold uppercase rounded-2xl'>{studentData.CHEST_NO}</div>
+                <div className='flex flex-col items-center justify-center'>
+                  <h1 className='text-xl sm:text-3xl font-semibold'>{studentData.NAME}</h1>
+                  <p className='-mt-0.5 text-sm sm:text-md'>{studentData.DEPARTMENT}</p>
+                </div>
               </div>
 
             </div>
@@ -169,7 +171,7 @@ function index() {
       {!loading && initial && (
         <div className="flex items-center justify-center w-full mt-8">
           <div className="text-center">
-            <h1 className="text-2xl font-semibold primary-text mb-2 mx-auto flex items-center justify-center"><LeafyGreen size={36}/></h1>
+            <h1 className="text-2xl font-semibold primary-text mb-2 mx-auto flex items-center justify-center"><LeafyGreen size={36} /></h1>
             <p className="text-lg text-gray-600">Everything is set! You can start your search.</p>
           </div>
         </div>
