@@ -4,6 +4,7 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Checkbox
 } from "@material-tailwind/react";
 import Airtable from "airtable";
 import backendUrl from "@/const/backendUrl";
@@ -61,7 +62,13 @@ function App() {
     STAGE_SCORE: '',
     STAGE_OPINION: '',
     OVERALL_OPINION: '',
-    OVERALL_GRADE: ''
+    OVERALL_GRADE: '',
+    ORIENTATION_ATTENDED: false,
+    SELECTION_CAMP_ATTENDED: false,
+    BONUS_GRADE: '',
+    BONUS_OPINION: '',
+    FUND_COLLECTED: '',
+    SELECTION_RESULT: '',
   });
 
   const getStudent = async (search) => {
@@ -100,7 +107,13 @@ function App() {
             STAGE_SCORE: record[0].fields.STAGE_GRADE || '',
             STAGE_OPINION: record[0].fields.STAGE_OPINION || '',
             OVERALL_GRADE: record[0].fields.OVERALL_GRADE || '',
-            OVERALL_OPINION: record[0].fields.OVERALL_OPINION || ''
+            OVERALL_OPINION: record[0].fields.OVERALL_OPINION || '',
+            ORIENTATION_ATTENDED: record[0].fields.ORIENTATION_ATTENDED || false,
+            SELECTION_CAMP_ATTENDED: record[0].fields.SELECTION_CAMP_ATTENDED || false,
+            BONUS_GRADE: record[0].fields.BONUS_GRADE || '',
+            BONUS_OPINION: record[0].fields.BONUS_OPINION || '',
+            FUND_COLLECTED: record[0].fields.FUND_COLLECTED || '',
+            SELECTION_RESULT: record[0].fields.SELECTION_RESULT || '',
           });
           setStudentID(record[0].id);
           fetchNextPage();
@@ -134,7 +147,14 @@ function App() {
       STAGE_GROUP_OPINION: '',
       STAGE_SCORE: '',
       STAGE_OPINION: '',
-      OVERALL_GRADE: ''
+      OVERALL_GRADE: '',
+      OVERALL_OPINION: '',
+      ORIENTATION_ATTENDED: false,
+      SELECTION_CAMP_ATTENDED: false,
+      BONUS_GRADE: '',
+      BONUS_OPINION: '',
+      FUND_COLLECTED: '',
+      SELECTION_RESULT: '',
     });
     setSubmitted(true);
   };
@@ -159,6 +179,12 @@ function App() {
         STAGE_OPINION: grades.STAGE_OPINION,
         OVERALL_OPINION: grades.OVERALL_OPINION,
         OVERALL_GRADE: grades.OVERALL_GRADE,
+        ORIENTATION_ATTENDED: grades.ORIENTATION_ATTENDED,
+        SELECTION_CAMP_ATTENDED: grades.SELECTION_CAMP_ATTENDED,
+        BONUS_GRADE: grades.BONUS_GRADE,
+        BONUS_OPINION: grades.BONUS_OPINION,
+        FUND_COLLECTED: grades.FUND_COLLECTED,
+        SELECTION_RESULT: grades.SELECTION_RESULT,
       },
       function (err) {
         if (err) {
@@ -186,16 +212,17 @@ function App() {
 
     const interviewOverallGrade = (communicationGrade + dedicationGrade + skillAchievementGrade) / 3;
     updatedGrades.INTERVIEW_OVERALL_GRADE = pointToGrade[Math.round(interviewOverallGrade)] || 'D';
-    
+
     console.log(updatedGrades);
     // Calculate OVERALL_GRADE
     const debateScore = gradePoints[updatedGrades.DEBATE_SCORE] || 0;
     const groupScore = gradePoints[updatedGrades.GROUP_SCORE] || 0;
     const groupStageScore = gradePoints[updatedGrades.STAGE_GROUP_GRADE] || 0;
     const stageScore = gradePoints[updatedGrades.STAGE_SCORE] || 0;
+    const bonusScore = gradePoints[updatedGrades.BONUS_GRADE] || 0;
 
 
-    const overallGrade = (debateScore + groupScore + stageScore + groupStageScore) / 4;
+    const overallGrade = (debateScore + groupScore + stageScore + groupStageScore + bonusScore) / 5;
     updatedGrades.OVERALL_GRADE = pointToGrade[Math.round(overallGrade)] || 'D';
 
     setGrades(updatedGrades);
@@ -259,7 +286,7 @@ function App() {
               <Select
                 label="Skill & Achievement"
                 value={grades.SKILL_ACHIEVEMENT_TEXT}
-                onChange={(value) => handleGradeChange("SKILL_ACHIEVEMENTS", value)}
+                onChange={(value) => handleGradeChange("SKILL_ACHIEVEMENT", value)}
               >
                 {Object.keys(gradePoints).map((grade) => (
                   <Option key={grade} value={grade}>{grade}</Option>
@@ -343,7 +370,21 @@ function App() {
               <Textarea
                 label="Stage Opinion"
                 value={grades.STAGE_OPINION}
-                onChange={(e) => setGrades({ ...grades, STAGE_OPINION: e.target.value })}
+                onChange={(e) => setGrades({ ...grades, BONUS_GRADE: e.target.value })}
+              />
+              <Select
+                label="Bonus Score"
+                value={grades.BONUS_GRADE}
+                onChange={(value) => handleGradeChange("BONUS_GRADE", value)}
+              >
+                {Object.keys(gradePoints).map((grade) => (
+                  <Option key={grade} value={grade}>{grade}</Option>
+                ))}
+              </Select>
+              <Textarea
+                label="Bonus Opinion"
+                value={grades.BONUS_OPINION}
+                onChange={(e) => setGrades({ ...grades, BONUS_OPINION: e.target.value })}
               />
               <div className="flex items-center w-full">
                 <div className="flex flex-col w-full">
@@ -359,6 +400,49 @@ function App() {
               <div className="flex items-center justify-between border border-gray-400 bg-gray-400 p-2 rounded-lg">
                 <Typography variant="h6"> Overall Grade: {grades.OVERALL_GRADE}</Typography>
               </div>
+
+              <Typography variant="h5" className="mt-3" color="blue-gray">
+                Attendance
+              </Typography>
+              <div className="flex items-center gap-4 flex-col md:flex-row w-full">
+                <div className="flex justify-start items-start gap-2 w-full">
+                  <Checkbox
+                    id="orientation"
+                    name="orientation"
+                    checked={grades.ORIENTATION_ATTENDED}
+                    onChange={(e) => setGrades({ ...grades, ORIENTATION_ATTENDED: e.target.checked })}
+                    label="Orientation Attended"
+                  />
+                </div>
+                <div className="flex items-start justify-start gap-2 w-full">
+                  <Checkbox
+                    id="selection"
+                    name="selection"
+                    checked={grades.SELECTION_CAMP_ATTENDED}
+                    onChange={(e) => setGrades({ ...grades, SELECTION_CAMP_ATTENDED: e.target.checked })}
+                    label="Selection Camp Attended"
+                  />
+                </div>
+              </div>
+
+              <Typography variant="h5" className="mb-3" color="blue-gray">
+                Main Points
+              </Typography>
+              <Input
+                label="Fund Collected"
+                value={grades.FUND_COLLECTED}
+                onChange={(e) => setGrades({ ...grades, FUND_COLLECTED: e.target.value })}
+              />
+              <Select
+                label="Selection Result"
+                value={grades.SELECTION_RESULT}
+                onChange={(value) => setGrades({ ...grades, SELECTION_RESULT: value })}
+              >
+                <Option value="Pending">Pending</Option>
+                <Option value="Yes">Yes</Option>
+                <Option value="No">No</Option>
+
+              </Select>
               <Button
                 className="w-full bg-green-500 mt-2"
                 onClick={submitScores}
