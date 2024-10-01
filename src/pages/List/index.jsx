@@ -195,13 +195,8 @@ function index() {
                 </div>
                 <div className='bg-white text-black font-semibold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4 border border-gray-400'>
                   <h1 className='col-span-2 text-left text-sm sm:text-md' >Fund Collected</h1>
-                  <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.FUND_COLLECTED ? studentData.FUND_COLLECTED : '0'}</h1>
+                  <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.FUND_COLLECTED ? studentData.FUND_COLLECTED : 'N/A'}</h1>
                   <h1 className='col-span-2 text-center text-sm sm:text-md'>{'Amount'}</h1>
-                </div>
-                <div className='bg-white text-black font-semibold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4 border border-gray-400'>
-                  <h1 className='col-span-2 text-left text-sm sm:text-md' >Stage </h1>
-                  <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.STAGE_GRADE ? studentData.STAGE_GRADE : 'Nill'}</h1>
-                  <h1 className='col-span-2 text-center text-sm sm:text-md'>{studentData.STAGE_OPINION ? studentData.STAGE_OPINION : 'None'}</h1>
                 </div>
 
                 <div className='bg-[#241E59]/40 text-black font-semibold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mt-4 mb-4 border border-gray-400'>
