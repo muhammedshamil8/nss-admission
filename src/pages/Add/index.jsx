@@ -47,6 +47,8 @@ function App() {
   const [initial, setInitial] = useState(true);
   const [open, setOpen] = useState(false);
   const [admissionNo, setAdmissionNo] = useState("");
+  const [error, setError] = useState("");
+
   // Score states
   const [grades, setGrades] = useState({
     COMMUNICATION: '',
@@ -125,6 +127,9 @@ function App() {
         function done(err) {
           if (err) {
             console.error(err);
+            toast.error(err, {
+              position: 'top-center',
+            });
             setLoading(false);
             return;
           }
@@ -192,6 +197,9 @@ function App() {
       function (err) {
         if (err) {
           console.error(err);
+          toast.error(err, {
+            position: 'top-center',
+          });
           return;
         } else {
           // handleOpen();
