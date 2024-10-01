@@ -72,7 +72,7 @@ function App() {
     BONUS_GRADE: '',
     BONUS_OPINION: '',
     FUND_COLLECTED: '',
-    SELECTION_RESULT: '',
+    SELECTION_RESULT: 'Not Added',
   });
 
   const getStudent = async (search) => {
