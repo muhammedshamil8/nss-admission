@@ -9,7 +9,9 @@ import {
 import Airtable from "airtable";
 import backendUrl from "@/const/backendUrl";
 import { useState } from "react";
-import { Search, ChefHat, Loader } from 'lucide-react'
+import { Search, ChefHat, Loader } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
   `${backendUrl.airtableBase}`
@@ -44,7 +46,7 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [initial, setInitial] = useState(true);
   const [open, setOpen] = useState(false);
-
+  const [admissionNo, setAdmissionNo] = useState("");
   // Score states
   const [grades, setGrades] = useState({
     COMMUNICATION: '',
@@ -73,6 +75,7 @@ function App() {
 
   const getStudent = async (search) => {
     if (searchText === "") return;
+    setAdmissionNo(search);
     setInitial(false);
     clearStudentData();
     setAlert(false);
@@ -191,7 +194,11 @@ function App() {
           console.error(err);
           return;
         } else {
-          handleOpen();
+          // handleOpen();
+          toast.success(`Score Added to the Student ${studentID}`, {
+            position: 'top-center',
+          });
+          setAdmissionNo("");
           setInitial(true);
           clearStudentData();
         }
@@ -438,6 +445,7 @@ function App() {
                 value={grades.SELECTION_RESULT}
                 onChange={(value) => setGrades({ ...grades, SELECTION_RESULT: value })}
               >
+                <Option value="Not Added">Not Added</Option>
                 <Option value="Pending">Pending</Option>
                 <Option value="Yes">Yes</Option>
                 <Option value="No">No</Option>
@@ -472,8 +480,8 @@ function App() {
 
       {alert && <div className="text-red-500 mt-4">No student found!</div>}
 
-
-      <Dialog open={open} handler={handleOpen} className="p-6 rounded-lg shadow-lg bg-white">
+      <ToastContainer />
+      {/* <Dialog open={open} handler={handleOpen} className="p-6 rounded-lg shadow-lg bg-white">
         <DialogHeader>
           <h5 className="text-2xl font-bold text-gray-800">Score Added Successfully</h5>
         </DialogHeader>
@@ -505,7 +513,7 @@ function App() {
             <span>Thank You</span>
           </Button>
         </DialogFooter>
-      </Dialog>
+      </Dialog> */}
 
     </div >
   );
