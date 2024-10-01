@@ -442,7 +442,7 @@ function App() {
               />
               <Select
                 label="Selection Result"
-                aria-required
+                required
                 value={grades.SELECTION_RESULT}
                 onChange={(value) => setGrades({ ...grades, SELECTION_RESULT: value })}
               >
