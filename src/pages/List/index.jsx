@@ -102,9 +102,9 @@ function index() {
 
             </div>
             <div className='flex flex-col justify-center w-full items-center mt-10'>
-              <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold mb-6'>Interview</h1>
+              <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold mb-6 select-none'>Interview</h1>
               <div className='w-full'>
-                <div className='primary-bg text-white font-bold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4'>
+                <div className='primary-bg text-white font-bold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4 select-none'>
                   <h1 className='col-span-2 text-left' >Program</h1>
                   <h1 className='col-span-1 text-center'>Grade</h1>
                   <h1 className='col-span-2 text-center'>Opinion</h1>
@@ -134,9 +134,9 @@ function index() {
             </div>
 
             <div className='flex flex-col justify-center w-full items-center mt-10'>
-              <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold mb-6'>Selection</h1>
+              <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold mb-6 select-none'>Selection</h1>
               <div className='w-full'>
-                <div className='primary-bg text-white font-bold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4'>
+                <div className='primary-bg text-white font-bold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4 select-none'>
                   <h1 className='col-span-2 text-left' >Program</h1>
                   <h1 className='col-span-1 text-center'>Grade</h1>
                   <h1 className='col-span-2 text-center'>Opinion</h1>
@@ -176,9 +176,9 @@ function index() {
             </div>
 
             <div className='flex flex-col justify-center w-full items-center mt-10'>
-              <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold mb-6'>Main Point</h1>
+              <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold mb-6 select-none'>Main Point</h1>
               <div className='w-full'>
-                <div className='primary-bg text-white font-bold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4'>
+                <div className='primary-bg text-white font-bold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mb-4 select-none'>
                   <h1 className='col-span-2 text-left' >Program</h1>
                   <h1 className='col-span-1 text-center'>Grade</h1>
                   <h1 className='col-span-2 text-center'>Opinion</h1>
@@ -201,7 +201,7 @@ function index() {
 
                 <div className='bg-[#241E59]/40 text-black font-semibold w-full grid grid-cols-5 p-4 px-8 rounded-2xl mt-4 mb-4 border border-gray-400'>
                   <h1 className='col-span-2 text-left text-sm sm:text-md' >Selection Result</h1>
-                  <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.SELECTION_RESULT ? studentData.SELECTION_RESULT : 'not given'}</h1>
+                  <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.SELECTION_RESULT ? studentData.SELECTION_RESULT : ''}</h1>
                   <h1 className='col-span-2 text-center text-sm sm:text-md'>{'After interview opinion'}</h1>
                 </div>
               </div>
@@ -212,7 +212,7 @@ function index() {
 
       {!loading && initial && (
         <div className="flex items-center justify-center w-full mt-14">
-          <div className="text-center">
+          <div className="text-center select-none">
             <h1 className="text-2xl font-semibold primary-text mb-2 mx-auto flex items-center justify-center"><LeafyGreen size={36} /></h1>
             <p className="text-lg text-gray-600">Everything is set! You can start your search.</p>
           </div>
@@ -220,7 +220,7 @@ function index() {
       )}
 
       {!loading && !initial && Object.keys(studentData).length === 0 && (
-        <div className="flex items-center justify-center w-full mt-8">
+        <div className="flex items-center justify-center w-full mt-8 select-none">
           <div className="text-center">
             <h1 className="text-xl  sm:text-2xl font-semibold primary-text mb-2">No Data Found</h1>
             <p className="text-md sm:text-lg text-gray-600">Please check the Chest No and try again.</p>
