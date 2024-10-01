@@ -118,7 +118,7 @@ function App() {
             BONUS_GRADE: record[0].fields.BONUS_GRADE || '',
             BONUS_OPINION: record[0].fields.BONUS_OPINION || '',
             FUND_COLLECTED: record[0].fields.FUND_COLLECTED || '',
-            SELECTION_RESULT: record[0].fields.SELECTION_RESULT || '',
+            SELECTION_RESULT: record[0].fields.SELECTION_RESULT || 'Not Added',
           });
           setStudentID(record[0].id);
           fetchNextPage();
