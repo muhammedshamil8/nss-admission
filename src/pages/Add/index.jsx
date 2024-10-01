@@ -195,7 +195,7 @@ function App() {
           return;
         } else {
           // handleOpen();
-          toast.success(`Score Added to the Student ${studentID}`, {
+          toast.success(`Score Added to the Student ${admissionNo}`, {
             position: 'top-center',
           });
           setAdmissionNo("");
@@ -442,6 +442,7 @@ function App() {
               />
               <Select
                 label="Selection Result"
+                aria-required
                 value={grades.SELECTION_RESULT}
                 onChange={(value) => setGrades({ ...grades, SELECTION_RESULT: value })}
               >
