@@ -330,9 +330,9 @@ function index() {
                     </div> */}
                     {studentData.formResponses ? (studentData.formResponses.map((response, index) => (
                       <div key={index} className='bg-stone text-black font-semibold w-full grid md:grid-cols-5 p-4 md:px-8 rounded-2xl mb-4 border border-gray-400 grid-cols-1 gap-y-4 md:gap-y-0'>
-                        <h1 className='col-span-2 text-left text-sm sm:text-md flex items-start flex-nowrap primary-text' >{response.question}
+                        <h1 className='col-span-2 text-left text-sm sm:text-md flex items-start flex-nowrap text-gray-600/90 font-normal' >{response.question}
                           <span className="block md:hidden"> :-</span></h1>
-                        <h1 className='col-span-3 text-left text-sm sm:text-md flex justify-end items-end'>{response.answer}</h1>
+                        <h1 className='col-span-3 text-left text-sm sm:text-md flex justify-end items-end primary-text'>{response.answer}</h1>
                       </div>
                     ))) : (
                       <div className='bg-white text-black font-semibold w-full grid grid-cols-5 p-4 md:px-8 rounded-2xl mb-4 border border-gray-400'>
