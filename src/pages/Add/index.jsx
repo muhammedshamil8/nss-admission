@@ -24,6 +24,7 @@ const gradePoints = {
   'B+': 7,
   B: 6,
   C: 5,
+  D: 4,
   'N/A': 0
 };
 
@@ -34,7 +35,9 @@ const pointToGrade = {
   7: 'B+',
   6: 'B',
   5: 'C',
-  0: 'N/A'
+  4: 'D',
+  3: 'E',
+  0: ''
 };
 
 function App() {
@@ -72,7 +75,7 @@ function App() {
     BONUS_GRADE: '',
     BONUS_OPINION: '',
     FUND_COLLECTED: '',
-    SELECTION_RESULT: 'Not Added',
+    SELECTION_RESULT: '...',
   });
 
   const getStudent = async (search) => {
@@ -97,7 +100,7 @@ function App() {
           }
           setStudentData(record[0].fields);
           setGrades({
-            COMMUNICATION: record[0].fields.COMMUNICATION_GRADE || '',
+            COMMUNICATION: record[0].fields.COMMUNICATION_GRADE  || '',
             DEDICATION: record[0].fields.DEDICATION_GRADE || '',
             SKILL_ACHIEVEMENT: record[0].fields.SKILL_ACHIEVEMENT_GRADE || '',
             SKILL_ACHIEVEMENT_TEXT: record[0].fields.SKILL_ACHIEVEMENT_TEXT || '',
@@ -118,7 +121,7 @@ function App() {
             BONUS_GRADE: record[0].fields.BONUS_GRADE || '',
             BONUS_OPINION: record[0].fields.BONUS_OPINION || '',
             FUND_COLLECTED: record[0].fields.FUND_COLLECTED || '',
-            SELECTION_RESULT: record[0].fields.SELECTION_RESULT || 'Not Added',
+            SELECTION_RESULT: record[0].fields.SELECTION_RESULT || '...',
           });
           setStudentID(record[0].id);
           fetchNextPage();
@@ -138,7 +141,7 @@ function App() {
   };
 
   const clearStudentData = () => {
-    setSearchText("");
+    // setSearchText("");
     setStudentData({});
     setGrades({
       COMMUNICATION: '',
@@ -171,28 +174,28 @@ function App() {
     base("Students").update(
       `${studentID}`,
       {
-        COMMUNICATION_GRADE: grades.COMMUNICATION,
-        DEDICATION_GRADE: grades.DEDICATION,
-        SKILL_ACHIEVEMENT_GRADE: grades.SKILL_ACHIEVEMENT,
-        SKILL_ACHIEVEMENTS: grades.SKILL_ACHIEVEMENT_TEXT,
-        INTERVIEW_OVERALL_OPINION: grades.INTERVIEW_OVERALL_OPINION,
-        INTERVIEW_OVERALL_GRADE: grades.INTERVIEW_OVERALL_GRADE,
-        DEBATE_GRADE: grades.DEBATE_SCORE,
-        DEBATE_OPINION: grades.DEBATE_OPINION,
-        GROUP_GRADE: grades.GROUP_SCORE,
-        GROUP_OPINION: grades.GROUP_OPINION,
-        STAGE_GROUP_GRADE: grades.STAGE_GROUP_GRADE,
-        STAGE_GROUP_OPINION: grades.STAGE_GROUP_OPINION,
-        STAGE_GRADE: grades.STAGE_SCORE,
-        STAGE_OPINION: grades.STAGE_OPINION,
-        OVERALL_OPINION: grades.OVERALL_OPINION,
-        OVERALL_GRADE: grades.OVERALL_GRADE,
-        ORIENTATION_ATTENDED: grades.ORIENTATION_ATTENDED,
-        SELECTION_CAMP_ATTENDED: grades.SELECTION_CAMP_ATTENDED,
-        BONUS_GRADE: grades.BONUS_GRADE,
-        BONUS_OPINION: grades.BONUS_OPINION,
-        FUND_COLLECTED: grades.FUND_COLLECTED,
-        SELECTION_RESULT: grades.SELECTION_RESULT,
+        COMMUNICATION_GRADE: grades.COMMUNICATION === 'N/A' ? '' : grades.COMMUNICATION,
+        DEDICATION_GRADE: grades.DEDICATION === 'N/A' ? '' : grades.DEDICATION,
+        SKILL_ACHIEVEMENT_GRADE: grades.SKILL_ACHIEVEMENT === 'N/A' ? '' : grades.SKILL_ACHIEVEMENT,
+        SKILL_ACHIEVEMENTS: grades.SKILL_ACHIEVEMENT_TEXT || '',
+        INTERVIEW_OVERALL_OPINION: grades.INTERVIEW_OVERALL_OPINION || '',
+        INTERVIEW_OVERALL_GRADE: grades.INTERVIEW_OVERALL_GRADE || '',
+        DEBATE_GRADE: grades.DEBATE_SCORE === 'N/A' ? '' : grades.DEBATE_SCORE,
+        DEBATE_OPINION: grades.DEBATE_OPINION || '',
+        GROUP_GRADE: grades.GROUP_SCORE === 'N/A' ? '' : grades.GROUP_SCORE,
+        GROUP_OPINION: grades.GROUP_OPINION || '',
+        STAGE_GROUP_GRADE: grades.STAGE_GROUP_GRADE === 'N/A' ? '' : grades.STAGE_GROUP_GRADE,
+        STAGE_GROUP_OPINION: grades.STAGE_GROUP_OPINION || '',
+        STAGE_GRADE: grades.STAGE_SCORE === 'N/A' ? '' : grades.STAGE_SCORE,
+        STAGE_OPINION: grades.STAGE_OPINION || '',
+        OVERALL_OPINION: grades.OVERALL_OPINION || '',
+        OVERALL_GRADE: grades.OVERALL_GRADE || '',
+        ORIENTATION_ATTENDED: grades.ORIENTATION_ATTENDED || false,
+        SELECTION_CAMP_ATTENDED: grades.SELECTION_CAMP_ATTENDED || false,
+        BONUS_GRADE: grades.BONUS_GRADE === 'N/A' ? '' : grades.BONUS_GRADE,
+        BONUS_OPINION: grades.BONUS_OPINION || '',
+        FUND_COLLECTED: grades.FUND_COLLECTED || '',
+        SELECTION_RESULT: grades.SELECTION_RESULT || '',
       },
       function (err) {
         if (err) {
@@ -226,7 +229,7 @@ function App() {
     const skillAchievementGrade = gradePoints[updatedGrades.SKILL_ACHIEVEMENT] || 0;
 
     const interviewOverallGrade = (communicationGrade + dedicationGrade + skillAchievementGrade) / 3;
-    updatedGrades.INTERVIEW_OVERALL_GRADE = pointToGrade[Math.round(interviewOverallGrade)] || 'D';
+    updatedGrades.INTERVIEW_OVERALL_GRADE = pointToGrade[Math.round(interviewOverallGrade)] || '...';
 
     console.log(updatedGrades);
     // Calculate OVERALL_GRADE
@@ -238,7 +241,7 @@ function App() {
 
 
     const overallGrade = (debateScore + groupScore + stageScore + groupStageScore + bonusScore) / 5;
-    updatedGrades.OVERALL_GRADE = pointToGrade[Math.round(overallGrade)] || 'D';
+    updatedGrades.OVERALL_GRADE = pointToGrade[Math.round(overallGrade)] || '...';
 
     setGrades(updatedGrades);
   };
@@ -323,7 +326,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between border border-gray-400 bg-gray-400 p-2 rounded-lg">
+              <div className="!text-gray-800 md:px-6 flex items-center justify-between border border-gray-400 bg-[#241E59]/40 p-2 rounded-lg">
                 <Typography variant="h6">Interview Overall Grade: {grades.INTERVIEW_OVERALL_GRADE}</Typography>
               </div>
             </div>
@@ -412,7 +415,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between border border-gray-400 bg-gray-400 p-2 rounded-lg">
+              <div className="!text-gray-800 md:px-6 flex items-center justify-between border border-gray-400 bg-[#241E59]/40 p-2 rounded-lg">
                 <Typography variant="h6"> Overall Grade: {grades.OVERALL_GRADE}</Typography>
               </div>
 
@@ -444,6 +447,7 @@ function App() {
                 Main Points
               </Typography>
               <Input
+                type="number"
                 label="Fund Collected"
                 value={grades.FUND_COLLECTED}
                 onChange={(e) => setGrades({ ...grades, FUND_COLLECTED: e.target.value })}
@@ -454,7 +458,7 @@ function App() {
                 value={grades.SELECTION_RESULT}
                 onChange={(value) => setGrades({ ...grades, SELECTION_RESULT: value })}
               >
-                <Option value="Not Added">Not Added</Option>
+                <Option value="...">...</Option>
                 <Option value="Pending">Pending</Option>
                 <Option value="Yes">Yes</Option>
                 <Option value="No">No</Option>
