@@ -184,7 +184,7 @@ function index() {
                 <div className="flex items-center justify-center w-full gap-2 mb-6">
                   <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold  select-none'>Main Point</h1>
                   <div className=''>
-                    {<button className={`primary-bg text-white font-bold  px-4 py-1.5  rounded-2xl  select-none ${view.mainPoint ? 'bg-[#241E59]' : 'bg-[#241E59]/40'}`} onClick={() => toggleView('mainPoint')}>
+                    {<button className={`primary-text font-bold  px-4 py-1.5  rounded-2xl  select-none ${view.mainPoint ? '' : ''}`} onClick={() => toggleView('mainPoint')}>
                       {view.mainPoint ? 'Hide' : 'Show'}
                     </button>}
                   </div>
@@ -225,7 +225,7 @@ function index() {
                 <div className="flex items-center justify-center w-full gap-2 mb-6">
                   <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold select-none'>Interview</h1>
                   <div className=''>
-                    {<button className={`primary-bg text-white font-bold  px-4 py-1.5  rounded-2xl  select-none ${view.interview ? 'bg-[#241E59]' : 'bg-[#241E59]/40'}`} onClick={() => toggleView('interview')}>
+                    {<button className={`primary-text font-bold  px-4 py-1.5  rounded-2xl  select-none ${view.interview ? '' : ''}`} onClick={() => toggleView('interview')}>
                       {view.interview ? 'Hide' : 'Show'}
                     </button>}
                   </div>
@@ -266,7 +266,7 @@ function index() {
                 <div className="flex items-center justify-center w-full gap-2 mb-6">
                   <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold  select-none'>Selection Camp</h1>
                   <div className=''>
-                    {<button className={`primary-bg text-white font-bold  px-4 py-1.5  rounded-2xl  select-none ${view.selection ? 'bg-[#241E59]' : 'bg-[#241E59]/40'}`} onClick={() => toggleView('selection')}>
+                    {<button className={`primary-text font-bold  px-4 py-1.5  rounded-2xl  select-none ${view.selection ? '' : ''}`} onClick={() => toggleView('selection')}>
                       {view.selection ? 'Hide' : 'Show'}
                     </button>}
                   </div>
@@ -317,20 +317,20 @@ function index() {
                 <div className="flex items-center justify-center w-full gap-2 mb-6">
                   <h1 className='primary-text underline underline-offset-2 text-xl sm:text-3xl font-semibold  select-none'>About (Form Response)</h1>
                   <div className=''>
-                    {<button className={`primary-bg text-white font-bold  px-4 py-1.5  rounded-2xl  select-none ${view.about ? 'bg-[#241E59]' : 'bg-[#241E59]/40'}`} onClick={() => toggleView('about')}>
+                    {<button className={`primary-text font-bold  px-4 py-1.5  rounded-2xl  select-none ${view.about ? '' : ''}`} onClick={() => toggleView('about')}>
                       {view.about ? 'Hide' : 'Show'}
                     </button>}
                   </div>
                 </div>
                 {view.about && (
                   <div className='w-full'>
-                    <div className='primary-bg text-white font-bold w-full grid grid-cols-5 p-4 md:px-8 rounded-2xl mb-4 select-none'>
+                    {/* <div className='primary-bg text-white font-bold w-full grid grid-cols-5 p-4 md:px-8 rounded-2xl mb-4 select-none'>
                       <h1 className='col-span-2 text-left text-pink-400' >Question</h1>
                       <h1 className='col-span-3 text-right'>Response</h1>
-                    </div>
+                    </div> */}
                     {studentData.formResponses ? (studentData.formResponses.map((response, index) => (
                       <div key={index} className='bg-stone text-black font-semibold w-full grid md:grid-cols-5 p-4 md:px-8 rounded-2xl mb-4 border border-gray-400 grid-cols-1 gap-y-4 md:gap-y-0'>
-                        <h1 className='col-span-2 text-left text-sm sm:text-md flex items-start flex-nowrap text-pink-400' >{response.question}
+                        <h1 className='col-span-2 text-left text-sm sm:text-md flex items-start flex-nowrap primary-text' >{response.question}
                           <span className="block md:hidden"> :-</span></h1>
                         <h1 className='col-span-3 text-left text-sm sm:text-md flex justify-end items-end'>{response.answer}</h1>
                       </div>
