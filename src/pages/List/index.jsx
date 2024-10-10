@@ -4,6 +4,7 @@ import Airtable from "airtable";
 import backendUrl from "@/const/backendUrl";
 import { useNavigate } from "react-router-dom";
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useAuth } from '@/context/AuthContext';
 
 const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
   `${backendUrl.airtableBase}`
@@ -18,6 +19,11 @@ function index() {
   const navigate = useNavigate();
   const [searchMode, setSearchMode] = useState("chest");
   const [parent, enableAnimations] = useAutoAnimate(/* optional config */)
+
+  const authContext = useAuth();
+  const { user, role: userRole, handleSignOut } = authContext || {};
+
+
   // toggle view cards
   const [view, setView] = useState({
     interview: true,
