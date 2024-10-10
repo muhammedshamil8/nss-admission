@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import { Loader } from 'lucide-react';
 
-const AuthRoleRequire = ({ role, children }) => {
+const AuthRoleRequire = ({ children }) => {
     const authContext = useAuth();
     const { user, role: userRole, handleSignOut } = authContext || {};
     const [loading, setLoading] = useState(true);
@@ -10,7 +11,7 @@ const AuthRoleRequire = ({ role, children }) => {
 
     useEffect(() => {
         if (user !== null) {
-            if (userRole !== role) {
+            if (!userRole) {
                 handleSignOut();
                 navigate('/login');
             }
@@ -18,17 +19,17 @@ const AuthRoleRequire = ({ role, children }) => {
         } else {
             navigate('/login');
         }
-    }, [user, userRole, role, navigate, handleSignOut]);
+    }, [user, userRole, navigate, handleSignOut]);
 
     if (loading) {
         return (
             <div className='fixed top-0 left-0 w-full h-full bg-white dark:bg-slate-900 flex items-center justify-center z-50'>
-                <p className='text-center dark:text-white flex items-center justify-center'>Loading...</p>
+                <p className='text-center dark:text-white flex items-center justify-center font-semibold'>Loading...  <Loader className="animate-spin" /></p>
             </div>
         );
     }
 
-    return userRole === role ? children : <Navigate to="/login" replace />;
+    return userRole ? children : <Navigate to="/login" replace />;
 };
 
 export default AuthRoleRequire;
