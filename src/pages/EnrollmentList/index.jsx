@@ -60,8 +60,8 @@ function EnrollmentList() {
         <div className='flex items-center justify-center gap-4 mt-14 mb-12 sm:mb-20'>
           <img src={Logo} className='w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full' alt='NSS Logo' />
           <div className='flex flex-col items-center'>
-            <h1 className='text-xl sm:text-2xl font-bold primary-text'>NSS ADMISSION</h1>
-            <h3 className='text-md sm:text-lg font-normal primary-text -mt-1'>SCORE SYSTEM</h3>
+            <h1 className='text-xl sm:text-2xl font-bold primary-text'>NSS ENROLLMENT LIST</h1>
+            <h3 className='text-md sm:text-lg font-normal primary-text -mt-1'>2024-25 YEAR</h3>
           </div>
         </div>
 
