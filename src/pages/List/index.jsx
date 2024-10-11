@@ -218,6 +218,21 @@ function index() {
                       <h1 className='col-span-2 text-center text-sm sm:text-md'>{'Collected Amount'}</h1>
                     </div>
 
+                    <div className='bg-white text-black font-semibold w-full grid grid-cols-5 p-4 md:px-8 rounded-2xl mb-4 border border-gray-400'>
+                      <h1 className='col-span-2 text-left text-sm sm:text-md'>Selected</h1>
+                      <h1 className='col-span-1 text-center text-sm sm:text-md'>
+                        {studentData.studentInfo?.SELECTED === true ? (
+                          <span className="bg-green-500 text-white px-2 md:px-4 py-1 rounded-lg">Passed</span>
+                        ) : studentData.studentInfo?.SELECTED === false ? (
+                          <span className="bg-red-500 text-white px-2 md:px-4 py-1 rounded-lg">Failed</span>
+                        ) : (
+                          <span className="bg-yellow-600 text-white px-2 md:px-4 py-1 rounded-lg">Pending</span>
+                        )}
+                      </h1>
+                      <h1 className='col-span-2 text-center text-sm sm:text-md'>Final Decision</h1>
+                    </div>
+
+
                     <div className='bg-[#241E59]/40 text-black font-semibold w-full grid grid-cols-5 p-4 md:px-8 rounded-2xl mt-4 mb-4 border border-gray-400'>
                       <h1 className='col-span-2 text-left text-sm sm:text-md' >Selection Result</h1>
                       <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.studentInfo?.SELECTION_RESULT ? studentData.studentInfo?.SELECTION_RESULT : <span className="text-gray-700">...</span>}</h1>
@@ -308,6 +323,11 @@ function index() {
                       <h1 className='col-span-2 text-left text-sm sm:text-md' >Bonus Points</h1>
                       <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.studentInfo?.BONUS_GRADE ? studentData.studentInfo?.BONUS_GRADE : <span className="text-gray-500">Nill</span>}</h1>
                       <h1 className='col-span-2 text-center text-sm sm:text-md'>{studentData.studentInfo?.BONUS_OPINION ? studentData.studentInfo?.BONUS_OPINION : <span className="text-gray-500">None</span>}</h1>
+                    </div>
+                    <div className='bg-white text-black font-semibold w-full grid grid-cols-5 p-4 md:px-8 rounded-2xl mb-4 border border-gray-400'>
+                      <h1 className='col-span-2 text-left text-sm sm:text-md' >Special Task</h1>
+                      <h1 className='col-span-1 text-center text-sm sm:text-md'>{studentData.studentInfo?.SPECIAL_TASK_GRADE ? studentData.studentInfo?.SPECIAL_TASK_GRADE : <span className="text-gray-500">Nill</span>}</h1>
+                      <h1 className='col-span-2 text-center text-sm sm:text-md'>{studentData.studentInfo?.SPECIAL_TASK_OPINION ? studentData.studentInfo?.SPECIAL_TASK_OPINION : <span className="text-gray-500">None</span>}</h1>
                     </div>
 
                     <div className='bg-[#241E59]/40 text-black font-semibold w-full grid grid-cols-5 p-4 md:px-8 rounded-2xl mt-4 mb-4 border border-gray-400'>

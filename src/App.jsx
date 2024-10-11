@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import './assets/styles/index.css'
 import { AuthProvider } from "./context/AuthContext";
-import { Login, Add, List } from "./pages";
+import { Login, Add, List, EnrollmentList, NotFound } from "./pages";
 import AdminLayout from "./layout/AdminLayout";
 
 
@@ -20,6 +20,8 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/login", element: <Login /> },
+  { path: "/enrollmentlist", element: <EnrollmentList /> },
+  { path: '*', element: <NotFound /> }
 ]);
 
 

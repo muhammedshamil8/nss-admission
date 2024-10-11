@@ -7,6 +7,7 @@ import { Lock, Mail, Loader } from 'lucide-react';
 import Footer from '@/components/Footer';
 import Logo from '@/assets/icons/nss_logo.png';
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -53,6 +54,12 @@ const Login = () => {
 
     return (
         <div className="flex flex-col items-center justify-center  p-4 h-screen">
+            <div className='flex w-full justify-end p-2'>
+                <Link
+                    to={'/enrollmentlist'}
+                    className='bg-blue-900 text-white px-4 py-1 rounded-md font-semibold text-sm transition-all ease-in-out hover:bg-blue-700'
+                >Show Selected List</Link>
+            </div>
             <form onSubmit={handleLogin} className="rounded-lg p-8 max-w-md w-full flex-grow  bg-white" ref={parent}>
                 <div className='flex items-center justify-center gap-4 mt-20 mb-20 sm:mb-48'>
                     <img src={Logo} className='w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full' alt='NSS Logo' />
@@ -93,7 +100,7 @@ const Login = () => {
                             className="w-full outline-none"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            autoComplete="current-password" 
+                            autoComplete="current-password"
                         />
                     </div>
                 </div>

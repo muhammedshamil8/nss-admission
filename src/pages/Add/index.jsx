@@ -62,6 +62,8 @@ function App() {
     DEDICATION: '',
     SKILL_ACHIEVEMENT: '',
     SKILL_ACHIEVEMENT_TEXT: '',
+    SPECIAL_TASK: '',
+    SPECIAL_TASK_OPINION: '',
     INTERVIEW_OVERALL_OPINION: '',
     INTERVIEW_OVERALL_GRADE: '',
     DEBATE_SCORE: '',
@@ -74,7 +76,7 @@ function App() {
     STAGE_OPINION: '',
     OVERALL_OPINION: '',
     OVERALL_GRADE: '',
-    ORIENTATION_ATTENDED: false,
+    SELECTED: false,
     SELECTION_CAMP_ATTENDED: false,
     BONUS_GRADE: '',
     BONUS_OPINION: '',
@@ -107,7 +109,9 @@ function App() {
             COMMUNICATION: record[0].fields.COMMUNICATION_GRADE || '',
             DEDICATION: record[0].fields.DEDICATION_GRADE || '',
             SKILL_ACHIEVEMENT: record[0].fields.SKILL_ACHIEVEMENT_GRADE || '',
-            SKILL_ACHIEVEMENT_TEXT: record[0].fields.SKILL_ACHIEVEMENT_TEXT || '',
+            SKILL_ACHIEVEMENT_TEXT: record[0].fields.SKILL_ACHIEVEMENTS || '',
+            SPECIAL_TASK: record[0].fields.SPECIAL_TASK_GRADE || '',
+            SPECIAL_TASK_OPINION: record[0].fields.SPECIAL_TASK_OPINION || '',
             INTERVIEW_OVERALL_OPINION: record[0].fields.INTERVIEW_OVERALL_OPINION || '',
             INTERVIEW_OVERALL_GRADE: record[0].fields.INTERVIEW_OVERALL_GRADE || '',
             DEBATE_SCORE: record[0].fields.DEBATE_GRADE || '',
@@ -120,7 +124,7 @@ function App() {
             STAGE_OPINION: record[0].fields.STAGE_OPINION || '',
             OVERALL_GRADE: record[0].fields.OVERALL_GRADE || '',
             OVERALL_OPINION: record[0].fields.OVERALL_OPINION || '',
-            ORIENTATION_ATTENDED: record[0].fields.ORIENTATION_ATTENDED || false,
+            SELECTED: record[0].fields.SELECTED || false,
             SELECTION_CAMP_ATTENDED: record[0].fields.SELECTION_CAMP_ATTENDED || false,
             BONUS_GRADE: record[0].fields.BONUS_GRADE || '',
             BONUS_OPINION: record[0].fields.BONUS_OPINION || '',
@@ -152,6 +156,8 @@ function App() {
       DEDICATION: '',
       SKILL_ACHIEVEMENT: '',
       SKILL_ACHIEVEMENT_TEXT: '',
+      SPECIAL_TASK: '',
+      SPECIAL_TASK_OPINION: '',
       INTERVIEW_OVERALL_OPINION: '',
       INTERVIEW_OVERALL_GRADE: '',
       DEBATE_SCORE: '',
@@ -164,7 +170,7 @@ function App() {
       STAGE_OPINION: '',
       OVERALL_GRADE: '',
       OVERALL_OPINION: '',
-      ORIENTATION_ATTENDED: false,
+      SELECTED: false,
       SELECTION_CAMP_ATTENDED: false,
       BONUS_GRADE: '',
       BONUS_OPINION: '',
@@ -182,6 +188,8 @@ function App() {
         DEDICATION_GRADE: grades.DEDICATION === 'N/A' ? '' : grades.DEDICATION,
         SKILL_ACHIEVEMENT_GRADE: grades.SKILL_ACHIEVEMENT === 'N/A' ? '' : grades.SKILL_ACHIEVEMENT,
         SKILL_ACHIEVEMENTS: grades.SKILL_ACHIEVEMENT_TEXT || '',
+        SPECIAL_TASK_GRADE: grades.SPECIAL_TASK === 'N/A' ? '' : grades.SPECIAL_TASK,
+        SPECIAL_TASK_OPINION: grades.SPECIAL_TASK_OPINION || '',
         INTERVIEW_OVERALL_OPINION: grades.INTERVIEW_OVERALL_OPINION || '',
         INTERVIEW_OVERALL_GRADE: grades.INTERVIEW_OVERALL_GRADE || '',
         DEBATE_GRADE: grades.DEBATE_SCORE === 'N/A' ? '' : grades.DEBATE_SCORE,
@@ -194,7 +202,7 @@ function App() {
         STAGE_OPINION: grades.STAGE_OPINION || '',
         OVERALL_OPINION: grades.OVERALL_OPINION || '',
         OVERALL_GRADE: grades.OVERALL_GRADE || '',
-        ORIENTATION_ATTENDED: grades.ORIENTATION_ATTENDED || false,
+        SELECTED: grades.SELECTED || false,
         SELECTION_CAMP_ATTENDED: grades.SELECTION_CAMP_ATTENDED || false,
         BONUS_GRADE: grades.BONUS_GRADE === 'N/A' ? '' : grades.BONUS_GRADE,
         BONUS_OPINION: grades.BONUS_OPINION || '',
@@ -309,7 +317,7 @@ function App() {
                   </Select>
                   <Select
                     label="Skill & Achievement"
-                    value={grades.SKILL_ACHIEVEMENT_TEXT}
+                    value={grades.SKILL_ACHIEVEMENT}
                     onChange={(value) => handleGradeChange("SKILL_ACHIEVEMENT", value)}
                   >
                     {Object.keys(gradePoints).map((grade) => (
@@ -394,7 +402,7 @@ function App() {
                   <Textarea
                     label="Stage Opinion"
                     value={grades.STAGE_OPINION}
-                    onChange={(e) => setGrades({ ...grades, BONUS_GRADE: e.target.value })}
+                    onChange={(e) => setGrades({ ...grades, STAGE_OPINION: e.target.value })}
                   />
                   <Select
                     label="Bonus Score"
@@ -409,6 +417,20 @@ function App() {
                     label="Bonus Opinion"
                     value={grades.BONUS_OPINION}
                     onChange={(e) => setGrades({ ...grades, BONUS_OPINION: e.target.value })}
+                  />
+                  <Select
+                    label="Special Task"
+                    value={grades.SPECIAL_TASK}
+                    onChange={(value) => setGrades({ ...grades, SPECIAL_TASK: value })}
+                  >
+                    {Object.keys(gradePoints).map((grade) => (
+                      <Option key={grade} value={grade}>{grade}</Option>
+                    ))}
+                  </Select>
+                  <Textarea
+                    label="Special Task Opinion"
+                    value={grades.SPECIAL_TASK_OPINION}
+                    onChange={(e) => setGrades({ ...grades, SPECIAL_TASK_OPINION: e.target.value })}
                   />
                   <div className="flex items-center w-full">
                     <div className="flex flex-col w-full">
@@ -426,16 +448,16 @@ function App() {
                   </div>
 
                   <Typography variant="h5" className="mt-3" color="blue-gray">
-                    Attendance
+                    Selected
                   </Typography>
                   <div className="flex items-center gap-4 flex-col md:flex-row w-full">
                     <div className="flex justify-start items-start gap-2 w-full">
                       <Checkbox
-                        id="orientation"
-                        name="orientation"
-                        checked={grades.ORIENTATION_ATTENDED}
-                        onChange={(e) => setGrades({ ...grades, ORIENTATION_ATTENDED: e.target.checked })}
-                        label="Orientation Attended"
+                        id="selected"
+                        name="selected"
+                        checked={grades.SELECTED}
+                        onChange={(e) => setGrades({ ...grades, SELECTED: e.target.checked })}
+                        label="Selected"
                       />
                     </div>
                     <div className="flex items-start justify-start gap-2 w-full">
